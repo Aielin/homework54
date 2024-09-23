@@ -10,12 +10,21 @@ const createItems = () =>{
 
 const Game = () => {
     const [items, setItems] = useState(createItems());
+    const [tries, setTries] = useState(0);
 
 
     const handleClick = (index: number) => {
-        const newItems = [...items];
-        newItems[index] = {...newItems[index], clicked: true};
-        setItems(newItems);
+        if(!items[index].checked){
+            const newItems = [...items];
+            newItems[index] = {...newItems[index], clicked: true};
+            setItems(newItems);
+            setTries(tries + 1);
+        }
+    };
+
+    const resetGame = () => {
+        setItems(createItems());
+        setTries(0);
     }
 
     return (
@@ -30,6 +39,10 @@ const Game = () => {
                         {item.clicked && item.hasItem && '🎁'}
                     </div>
                 ))}
+            </div>
+            <div className='game-controls'>
+                <p>Попытки: {tries}</p>
+                <button onClick={resetGame}>Сброс</button>
             </div>
         </div>
     );
