@@ -11,20 +11,27 @@ const createItems = () =>{
 const Game = () => {
     const [items, setItems] = useState(createItems());
     const [tries, setTries] = useState(0);
+    const [gameOver, setGameOver] = useState(false);
 
 
     const handleClick = (index: number) => {
-        if(!items[index].checked){
+        if(!gameOver && !items [index].checked){
             const newItems = [...items];
             newItems[index] = {...newItems[index], clicked: true};
             setItems(newItems);
             setTries(tries + 1);
+
+            if (newItems[index].hasItem){
+                setGameOver(true);
+                alert('Вы нашли его 🎉! Игра завершена.')
+            }
         }
     };
 
     const resetGame = () => {
         setItems(createItems());
         setTries(0);
+        setGameOver(false);
     }
 
     return (
