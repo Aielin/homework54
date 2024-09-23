@@ -3,8 +3,8 @@ import Game from "./components/Game.tsx";
 
 const App = () => {
         return (
-            <div>
-                <h1>Найди спрятанный подарок</h1>
+            <div className="app">
+                <h1 className='title'>Найди спрятанный подарок</h1>
                 <Game />
             </div>
         );
